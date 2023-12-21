@@ -1,0 +1,8 @@
+---
+# defaults file for roles/configureSwitch
+vlan_list:
+  - name: "user.data"
+    id: "3102"
+  - name: "user.voice"
+    id: "2102"
+    

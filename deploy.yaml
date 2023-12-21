@@ -1,0 +1,6 @@
+---
+- name: Gather Cisco IOS Facts
+  hosts: all
+  gather_facts: no
+  roles: 
+    - configureSwitch

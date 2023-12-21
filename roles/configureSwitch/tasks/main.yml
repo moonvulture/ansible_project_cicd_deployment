@@ -1,0 +1,3 @@
+---
+#deploy tasks
+  - include_tasks: configureVlans.yml
