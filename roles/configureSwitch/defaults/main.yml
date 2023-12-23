@@ -6,3 +6,31 @@ vlan_list:
   - name: "user.voice"
     id: "2102"
     
+hostname: "{{ inventory_hostname }}"
+
+radius_server_1: claywcd959nm001
+radius_server_2: apckw06g02nm003
+radius_server_3: apcgwcd929nm003
+tacacs_server1: apckw06g02nm005
+tacacs_server2: apcgwcd929nm005
+tacacs_ip1: 10.1.2.3
+tacacs_ip2: 10.1.2.4
+tacacs_key1: 001D1E565D0F18020C # move to vault
+tacacs_key2: 061F0271151A1A1D06 # move to vault
+radius_author_client1: 134.233.10.13
+radius_author_key1: 13445E322248570E7B30792B610E420145
+radius_author_client2: 136.215.64.92
+radius_author_key2: 114850253E565828543E7A3C7C1F642440
+radius_author_client3: 136.215.192.32
+radius_author_key3: 00455A262D1F58225F351D565D35541141
+global_settings:
+    - no ip source-route
+    - ip routing
+    - no ip gratuitous-arps
+    - login block-for 900 attempts 3 within 120
+    - login on-failure log
+    - login on-success log
+    - vtp mode off
+    - authentication mac-move permit
+    - authentication logging verbose
+    - authentication critical recovery delay 1000

@@ -1,0 +1,13 @@
+---
+- name: configure tacacs group
+  cisco.ios.ios_config:
+    lines: 
+      - server name "{{ tacacs_server1 }}"
+      - server name "{{ tacacs_server2 }}"
+      - "server-private {{ tacacs_ip1 }} key 7 {{ tacacs_key1 }}"
+      - "server-private {{ tacacs_ip2 }} key 7 {{ tacacs_key2 }}"
+      - ip tacacs source-interface Loopback0
+    parents: aaa group server tacacs+ "{{ tacacs_server_group }}"
+    save_when: modified
+
+    #  server-private 136.215.64.94 key 7 001D1E565D0F18020C

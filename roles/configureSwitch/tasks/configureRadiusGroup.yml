@@ -1,0 +1,19 @@
+---
+- name: configure radius group
+  cisco.ios.ios_config:
+    lines: 
+      - "server name {{ radius_server_1 }}"
+      - "server name {{ radius_server_2 }}"
+      - "server name {{ radius_server_3 }}"
+    parents: "aaa group server radius {{ radius_server_group }}"
+    save_when: modified
+
+- name: configure radius group
+  cisco.ios.ios_config:
+    lines: 
+      - "client {{ radius_author_client1 }} server-key 7 {{ radius_author_key1 }}"
+      - "client {{ radius_author_client2 }} server-key 7 {{ radius_author_key2 }}"
+      - "client {{ radius_author_client3 }} server-key 7 {{ radius_author_key3 }}"
+      - auth-type any
+    parents: aaa server radius dynamic-author 
+    save_when: modified

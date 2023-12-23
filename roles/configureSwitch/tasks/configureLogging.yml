@@ -1,0 +1,23 @@
+---
+
+
+- name: Remove all existing configuration
+  cisco.ios.ios_logging_global:
+    state: deleted
+
+- name: Apply the provided configuration
+  cisco.ios.ios_logging_global:
+    config:
+      buffered:
+        severity: informational
+        size: 1000000
+        xml: false
+      hosts:
+        - hostname: 172.16.1.12
+        - hostname: 172.16.1.11
+      message_counter: log
+      # snmp_trap:
+      #   - errors
+      userinfo: true
+      logging_on: enable
+    state: merged

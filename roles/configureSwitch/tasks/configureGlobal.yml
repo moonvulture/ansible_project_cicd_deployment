@@ -1,0 +1,4 @@
+---
+- name: configure global settings 
+  cisco.ios.ios_config:
+    lines: "{{ global_settings }}"

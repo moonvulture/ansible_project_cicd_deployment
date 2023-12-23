@@ -2,5 +2,13 @@
 - name: Gather Cisco IOS Facts
   hosts: all
   gather_facts: no
+  vars:
+    configure_logging: false
+    configure_vlans: false
+    configure_domain: false
+    configure_radius_server_group: false
+    configure_tacacs_server_group: false
+    configure_global: false
+    configure_span_tree: true
   roles: 
     - configureSwitch

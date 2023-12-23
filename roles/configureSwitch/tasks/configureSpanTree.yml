@@ -1,0 +1,22 @@
+---
+- name: deploy mst config
+  cisco.ios.ios_config:
+    lines: 
+      - spanning-tree mode mst
+      - spanning-tree extend system-id
+
+- name: deploy mst config
+  cisco.ios.ios_config:
+    lines:
+      - name {{ inventory_hostname }}.army.mil
+      - revision 2
+      - instance 1 vlan 2-199, 250-499, 700-749, 1200-1599, 2000-2999
+      - instance 2 vlan 200-249, 500-699, 750-999, 1600-1999, 3000-3999
+      - instance 15 vlan 4000-4093
+    parents: spanning-tree mst configuration
+
+- name: deploy mst config
+  cisco.ios.ios_config:
+    lines:
+      - spanning-tree mst 0-2,15 priority 61440
+    save_when: modified

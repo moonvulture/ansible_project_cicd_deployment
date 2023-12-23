@@ -1,3 +1,16 @@
 ---
 #deploy tasks
   - include_tasks: configureVlans.yml
+    when: configure_vlans is defined and configure_vlans
+  - include_tasks: configureDomain.yml
+    when: configure_domain is defined and configure_domain
+  - include_tasks: configureLogging.yml
+    when: configure_logging is defined and configure_logging
+  - include_tasks: configureRadiusGroup.yml
+    when: configure_radius_server_group is defined and configure_radius_server_group
+  - include_tasks: configureTacacsGroup.yml
+    when: configure_tacacs_server_group is defined and configure_tacacs_server_group
+  - include_tasks: configureGlobal.yml
+    when: configure_global is defined and configure_global
+  - include_tasks: configureSpanTree.yml
+    when: configure_span_tree is defined and configure_span_tree

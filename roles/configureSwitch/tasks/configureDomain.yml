@@ -1,0 +1,16 @@
+---
+- name: Configure hostname and domain name
+  cisco.ios.ios_system:
+    hostname: "{{ inventory_hostname }}"
+    domain_name: "{{ domain_name }}"
+    domain_search:
+      - "{{ domain_list1 }}"
+      - "{{ domain_list2 }}"
+      - "{{ domain_list3 }}"
+      - "{{ domain_list4 }}"
+
+- name: Configure name servers
+  cisco.ios.ios_system:
+    name_servers:
+      - "{{ name_server1 }}"
+      - "{{ name_server2 }}"
