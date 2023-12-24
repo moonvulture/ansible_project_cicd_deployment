@@ -14,3 +14,9 @@
     when: configure_global is defined and configure_global
   - include_tasks: configureSpanTree.yml
     when: configure_span_tree is defined and configure_span_tree
+  - include_tasks: configureInterfaces.yml 
+    when: configure_interfaces is defined and configure_interfaces
+  - include_tasks: configureLayer3Interfaces.yml
+    when: configure_layer3_interfaces is defined and configure_layer3_interfaces
+  - include_tasks: configureUserPorts.yml
+    when: configure_user_ports is defined and configure_user_ports

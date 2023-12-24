@@ -1,0 +1,32 @@
+ description RackRow.Rack.RackUnit.Port
+ switchport access vlan 1000
+ switchport mode access
+ switchport nonegotiate
+ switchport voice vlan 210
+ bandwidth 1000000
+ load-interval 30
+ shutdown
+ authentication control-direction in
+ authentication event fail action next-method
+ authentication event server dead action authorize vlan 2210
+ authentication event server dead action authorize voice
+ authentication event server alive action reinitialize 
+ authentication host-mode multi-domain
+ authentication order dot1x mab
+ authentication priority dot1x mab
+ authentication port-control auto
+ authentication periodic
+ authentication timer reauthenticate server
+ mab
+ no snmp trap link-status
+ dot1x pae authenticator
+ dot1x timeout tx-period 20
+ storm-control broadcast level 5.00
+ storm-control multicast level 5.00
+ storm-control action trap
+ auto qos trust 
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ spanning-tree mst 0-2,15 cost 20000
+ service-policy input AutoQos-4.0-Trust-Cos-Input-Policy
+ service-policy output AutoQos-4.0-Output-Policy

@@ -1,0 +1,22 @@
+---
+- name: Setting no switchport on L3 interfaces
+  cisco.ios.ios_config:
+    lines:
+      - no switchport
+      - no ip redirects
+      - no ip unreachables
+      - no ip proxy-arp
+    parents: "interface {{ item.key }}"
+  loop: "{{ lookup('dict', hostvars[inventory_hostname]['interfaces']) }}"
+  when: item.value.layer3 is defined and item.value.layer3
+
+- name: Merge provided configuration with device configuration
+  cisco.ios.ios_interfaces:
+    config:
+      - name: GigabitEthernet0/0
+        description: "osv-asw01-gigabitethernet0/1_to_wan-port0"
+        enabled: true
+      - name: GigabitEthernet0/1
+        description: "iosv-asw01-gigabitethernet0/1_to_iosv-csw01-gigabitethernet0/0"
+        enabled: true
+    state: merged

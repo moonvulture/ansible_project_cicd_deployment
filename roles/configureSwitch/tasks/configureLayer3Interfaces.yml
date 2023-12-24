@@ -1,0 +1,15 @@
+---
+- name: Merge provided configuration with device configuration
+  cisco.ios.ios_l3_interfaces:
+    config:
+      - name: "{{ item.key }}"
+        ipv4:
+          - address: "{{ item.value.ip }}"
+      - name: "{{ item.key }}"
+        ipv4:
+          - address: "{{ item.value.ip }}"
+      - name: "{{ item.key }}"
+        ipv4:
+          - address: "{{ item.value.ip }}"
+    state: merged
+  loop: "{{ lookup('dict', hostvars[inventory_hostname]['interfaces']) }}"
