@@ -4,14 +4,18 @@
     gather_network_resources:
       - interfaces
 
+- name: debug
+  debug: 
+    var: ansible_facts 
+
 - name: set variable
   set_fact:
-    unset_interface: ansible_facts.network_resources.interfaces
+    unset_interface: "{{ ansible_facts.network_resources.interfaces }}"
+
+- name: debug
+  debug: 
+    var: unset_interface
 
 - name: apply switchport configs
   cisco.ios.ios_config:
     src: switchport.j2
-  loop: "{{ unset_interface }}"
-  when: ansible_facts.interface.description is not defined
-
-

@@ -3,12 +3,21 @@
   cisco.ios.ios_config:
     lines:
       - no switchport
+    parents: "interface {{ item.key }}"
+  loop: "{{ lookup('dict', hostvars[inventory_hostname]['interfaces']) }}"
+  when: item.value.physical_interface is defined and item.value.physical_interface
+
+- name: Setting L3 interface configurations
+  cisco.ios.ios_config:
+    lines:
       - no ip redirects
       - no ip unreachables
       - no ip proxy-arp
     parents: "interface {{ item.key }}"
   loop: "{{ lookup('dict', hostvars[inventory_hostname]['interfaces']) }}"
   when: item.value.layer3 is defined and item.value.layer3
+
+
 
 - name: Merge provided configuration with device configuration
   cisco.ios.ios_interfaces:
@@ -18,5 +27,8 @@
         enabled: true
       - name: GigabitEthernet0/1
         description: "iosv-asw01-gigabitethernet0/1_to_iosv-csw01-gigabitethernet0/0"
+        enabled: true
+      - name: vlan2270 
+        description: "netmod connection"
         enabled: true
     state: merged

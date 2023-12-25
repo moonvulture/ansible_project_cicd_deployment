@@ -1,3 +1,6 @@
+{% for interface in unset_interface %}
+{% if interface.description is not defined %}
+interface {{ interface.name }}
  description RackRow.Rack.RackUnit.Port
  switchport access vlan 1000
  switchport mode access
@@ -21,12 +24,11 @@
  no snmp trap link-status
  dot1x pae authenticator
  dot1x timeout tx-period 20
- storm-control broadcast level 5.00
- storm-control multicast level 5.00
- storm-control action trap
- auto qos trust 
  spanning-tree portfast
  spanning-tree bpduguard enable
  spanning-tree mst 0-2,15 cost 20000
  service-policy input AutoQos-4.0-Trust-Cos-Input-Policy
  service-policy output AutoQos-4.0-Output-Policy
+{% endif %}
+{% endfor %}
+ 

@@ -1,0 +1,33 @@
+---
+- name: Merge provided OSPF V2 configuration
+  cisco.ios.ios_ospfv2:
+    config:
+      processes:
+        - process_id: 1569
+          areas:
+            - area_id: "0"
+              authentication:
+                message_digest: true
+          network:
+            - address: "{{ item.network }}"
+              wildcard_bits: "{{ item.mask }}"
+              area: 0
+  loop: "{{ ospf.networks }}"
+
+- name: Merge provided OSPF V2 configuration
+  cisco.ios.ios_ospfv2:
+    config:
+      processes:
+        - process_id: 1569
+          router_id: "{{ router_id }}"
+          passive_interfaces:
+            default: true
+            interface:
+              set_interface: false
+              name: "{{ item.key }}"
+  loop: "{{ lookup('dict', hostvars[inventory_hostname]['interfaces']) }}"
+
+- name: Set router ID to the IP address of loopback0
+  set_fact:
+    router_id: "{{ interfaces.loopback0.ip | regex_search('^(\\d+\\.\\d+\\.\\d+\\.\\d+)') | first }}"
+

@@ -1,0 +1,6 @@
+--- 
+- name: Configure banner from file
+  cisco.ios.ios_banner:
+    banner: login
+    text: "{{ lookup('file', '/root/ansible_projects/ansible_project_cicd_pipeline/roles/configureSwitch/files/raw_banner.cfg') }}"  # Use unix formatted text files (LF not CRLF) to avoid idempotency issues.
+    state: present

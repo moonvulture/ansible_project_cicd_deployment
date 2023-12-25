@@ -20,3 +20,7 @@
     when: configure_layer3_interfaces is defined and configure_layer3_interfaces
   - include_tasks: configureUserPorts.yml
     when: configure_user_ports is defined and configure_user_ports
+  - include_tasks: configureOspf.yml
+    when: configure_ospf is defined and configure_ospf
+  - include_tasks: configureBanner.yml
+    when: configure_banner is defined and configure_banner

@@ -24,6 +24,7 @@ radius_author_key2: 114850253E565828543E7A3C7C1F642440
 radius_author_client3: 136.215.192.32
 radius_author_key3: 00455A262D1F58225F351D565D35541141
 global_settings:
+    - ip default-gateway {{ default_gateway }}
     - no ip source-route
     - ip routing
     - no ip gratuitous-arps
@@ -56,3 +57,23 @@ global_settings:
     - errdisable recovery cause arp-inspection
     - errdisable recovery cause loopback
     - errdisable recovery cause psp
+    - no ip forward-protocol nd
+    - ip tcp synwait-time 10
+    - ip tcp path-mtu-discovery
+    - no ip http server
+    - ip http port 65500
+    - ip http authentication local
+    - no ip http secure-server
+    - ip http secure-port 65501
+    - ip http secure-active-session-modules none
+    - ip http max-connections 1
+    - ip http active-session-modules none
+    - ip ospf name-lookup
+    - no ip ftp passive
+    - ip ftp source-interface Loopback0
+    - ip tftp source-interface Loopback0
+    - ip tacacs source-interface Loopback0 
+    - ip ssh time-out 60
+    - ip ssh authentication-retries 2
+    - ip ssh version 2
+    - ip scp server enable
