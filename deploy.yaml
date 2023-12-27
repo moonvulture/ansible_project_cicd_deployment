@@ -25,6 +25,6 @@
   connection: network_cli
   vars:
     configure_static_routes: false
-    configure_ospf_core: true
+    configure_ospf_core: false
   roles: 
     - configureSwitch
