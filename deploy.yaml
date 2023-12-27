@@ -4,30 +4,30 @@
   gather_facts: no
   connection: network_cli
   vars:
-    configure_logging: true
-    configure_vlans: true
-    configure_domain: true
-    configure_radius_server_group: true
-    configure_tacacs_server_group: true
-    configure_global: true
-    configure_span_tree: true
+    # configure_logging: true
+    # configure_vlans: true
+    # configure_domain: true
+    # configure_radius_server_group: true
+    # configure_tacacs_server_group: true
+    # configure_global: true
+    # configure_span_tree: true
+    # configure_interfaces: true
+    # configure_layer3_interfaces: true
+    # configure_user_ports: true
+    # configure_ospf: true
+    # configure_banner: true
+
+    configure_logging: false
+    configure_vlans: false
+    configure_domain: false
+    configure_radius_server_group: false
+    configure_tacacs_server_group: false
+    configure_global: false
+    configure_span_tree: false
     configure_interfaces: true
     configure_layer3_interfaces: true
-    configure_user_ports: true
+    configure_user_ports: false
     configure_ospf: true
-    configure_banner: true
-
-    # configure_logging: false
-    # configure_vlans: false
-    # configure_domain: false
-    # configure_radius_server_group: false
-    # configure_tacacs_server_group: false
-    # configure_global: false
-    # configure_span_tree: false
-    # configure_interfaces: false
-    # configure_layer3_interfaces: false
-    # configure_user_ports: false
-    # configure_ospf: false
-    # configure_banner: false
+    configure_banner: false
   roles: 
     - configureSwitch

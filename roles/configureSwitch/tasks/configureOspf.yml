@@ -7,7 +7,7 @@
           areas:
             - area_id: "0"
               authentication:
-                message_digest: true
+                message_digest: false
           network:
             - address: "{{ item.network }}"
               wildcard_bits: "{{ item.mask }}"
@@ -26,8 +26,4 @@
               set_interface: false
               name: "{{ item.key }}"
   loop: "{{ lookup('dict', hostvars[inventory_hostname]['interfaces']) }}"
-
-- name: Set router ID to the IP address of loopback0
-  set_fact:
-    router_id: "{{ interfaces.loopback0.ip | regex_search('^(\\d+\\.\\d+\\.\\d+\\.\\d+)') | first }}"
 
