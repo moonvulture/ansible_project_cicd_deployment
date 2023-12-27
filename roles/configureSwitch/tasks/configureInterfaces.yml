@@ -17,18 +17,15 @@
   loop: "{{ lookup('dict', hostvars[inventory_hostname]['interfaces']) }}"
   when: item.value.layer3 is defined and item.value.layer3
 
-
-
 - name: Merge provided configuration with device configuration
   cisco.ios.ios_interfaces:
     config:
       - name: GigabitEthernet0/0
-        description: "osv-asw01-gigabitethernet0/1_to_wan-port0"
         enabled: true
       - name: GigabitEthernet0/1
-        description: "iosv-asw01-gigabitethernet0/1_to_iosv-csw01-gigabitethernet0/0"
         enabled: true
-      - name: vlan2270 
-        description: "netmod connection"
+      - name: GigabitEthernet0/2
+        enabled: true
+      - name: GigabitEthernet0/3
         enabled: true
     state: merged

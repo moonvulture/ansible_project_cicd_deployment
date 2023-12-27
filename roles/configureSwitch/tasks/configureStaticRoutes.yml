@@ -1,0 +1,11 @@
+--- 
+- name: Configure Static Routes
+  cisco.ios.ios_static_routes:
+    config:
+      - address_families:
+          - afi: ipv4
+            routes:
+              - dest: 0.0.0.0/0
+                next_hops:
+                  - forward_router_address: 192.168.178.1
+    state: merged

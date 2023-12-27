@@ -1,0 +1,9 @@
+---
+- name: Merge provided OSPF V2 configuration - Configure Networks
+  cisco.ios.ios_ospfv2:
+    config:
+      processes:
+        - process_id: 1569
+          default_information:
+            originate: true
+    state: merged

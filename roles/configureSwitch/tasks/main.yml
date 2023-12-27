@@ -1,26 +1,30 @@
 ---
 #deploy tasks
-  - include_tasks: configureVlans.yml
-    when: configure_vlans is defined and configure_vlans
-  - include_tasks: configureDomain.yml
-    when: configure_domain is defined and configure_domain
-  - include_tasks: configureLogging.yml
-    when: configure_logging is defined and configure_logging
-  - include_tasks: configureRadiusGroup.yml
-    when: configure_radius_server_group is defined and configure_radius_server_group
-  - include_tasks: configureTacacsGroup.yml
-    when: configure_tacacs_server_group is defined and configure_tacacs_server_group
-  - include_tasks: configureGlobal.yml
-    when: configure_global is defined and configure_global
-  - include_tasks: configureSpanTree.yml
-    when: configure_span_tree is defined and configure_span_tree
-  - include_tasks: configureInterfaces.yml 
-    when: configure_interfaces is defined and configure_interfaces
-  - include_tasks: configureLayer3Interfaces.yml
-    when: configure_layer3_interfaces is defined and configure_layer3_interfaces
-  - include_tasks: configureUserPorts.yml
-    when: configure_user_ports is defined and configure_user_ports
-  - include_tasks: configureOspf.yml
-    when: configure_ospf is defined and configure_ospf
-  - include_tasks: configureBanner.yml
-    when: configure_banner is defined and configure_banner
+- include_tasks: configureVlans.yml
+  when: configure_vlans is defined and configure_vlans
+- include_tasks: configureDomain.yml
+  when: configure_domain is defined and configure_domain
+- include_tasks: configureLogging.yml
+  when: configure_logging is defined and configure_logging
+- include_tasks: configureRadiusGroup.yml
+  when: configure_radius_server_group is defined and configure_radius_server_group
+- include_tasks: configureTacacsGroup.yml
+  when: configure_tacacs_server_group is defined and configure_tacacs_server_group
+- include_tasks: configureGlobal.yml
+  when: configure_global is defined and configure_global
+- include_tasks: configureSpanTree.yml
+  when: configure_span_tree is defined and configure_span_tree
+- include_tasks: configureInterfaces.yml 
+  when: configure_interfaces is defined and configure_interfaces
+- include_tasks: configureLayer3Interfaces.yml
+  when: configure_layer3_interfaces is defined and configure_layer3_interfaces
+- include_tasks: configureUserPorts.yml
+  when: configure_user_ports is defined and configure_user_ports
+- include_tasks: configureOspf.yml
+  when: configure_ospf is defined and configure_ospf
+- include_tasks: configureBanner.yml
+  when: configure_banner is defined and configure_banner
+- include_tasks: configureStaticRoutes.yml
+  when: configure_static_routes is defined and configure_static_routes
+- include_tasks: configureOspfCore.yml
+  when: configure_ospf_core is defined and configure_ospf_core
