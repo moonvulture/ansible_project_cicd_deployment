@@ -1,5 +1,5 @@
 ---
-- name: Merge provided OSPF V2 configuration - Configure Networks
+- name: configure default information originate
   cisco.ios.ios_ospfv2:
     config:
       processes:
@@ -7,3 +7,33 @@
           default_information:
             originate: true
     state: merged
+
+- name: configure ospf process 100
+  cisco.ios.ios_ospfv2:
+    config:
+      processes:
+        - process_id: 100
+          areas:
+            - area_id: "0"
+          network:
+            - address: 10.100.0.0
+              wildcard_bits: 0.0.0.255
+              area: 100
+
+- name: configure router id for process 100
+  cisco.ios.ios_ospfv2:
+    config:
+      processes:
+        - process_id: 100
+          router_id: "{{ router_id }}"
+
+- name: configure passive interfaces for process 100
+  cisco.ios.ios_ospfv2:
+    config:
+      processes:
+        - process_id: 100
+          passive_interfaces:
+            default: true
+            interface:
+              set_interface: false
+              name: GigabitEthernet1/0

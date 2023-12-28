@@ -16,8 +16,6 @@
   when: configure_span_tree is defined and configure_span_tree
 - include_tasks: configureInterfaces.yml 
   when: configure_interfaces is defined and configure_interfaces
-- include_tasks: configureLayer3Interfaces.yml
-  when: configure_layer3_interfaces is defined and configure_layer3_interfaces
 - include_tasks: configureUserPorts.yml
   when: configure_user_ports is defined and configure_user_ports
 - include_tasks: configureOspf.yml
@@ -28,3 +26,4 @@
   when: configure_static_routes is defined and configure_static_routes
 - include_tasks: configureOspfCore.yml
   when: configure_ospf_core is defined and configure_ospf_core
+- include_tasks: commandWriteMem.yml

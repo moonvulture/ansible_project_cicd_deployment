@@ -5,7 +5,7 @@ vlan_list:
     id: "3102"
   - name: "user.voice"
     id: "2102"
-    
+
 hostname: "{{ inventory_hostname }}"
 
 radius_server_1: claywcd959nm001

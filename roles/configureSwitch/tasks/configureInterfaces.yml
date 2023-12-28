@@ -1,31 +1,33 @@
 ---
-- name: Setting no switchport on L3 interfaces
+- name: set interface descriptions
+  cisco.ios.ios_config:
+    lines:
+      - description {{ item.value.description }}
+    parents: "interface {{ item.key }}"
+  loop: "{{ lookup('dict', hostvars[inventory_hostname]['interfaces']) }}"
+
+- name: set no switchport
   cisco.ios.ios_config:
     lines:
       - no switchport
-    parents: "interface {{ item.key }}"
-  loop: "{{ lookup('dict', hostvars[inventory_hostname]['interfaces']) }}"
-  when: item.value.physical_interface is defined and item.value.physical_interface
+    parents: "interface {{ item }}"
+  loop: "{{ no_switchport_interfaces }}"
 
-- name: Setting L3 interface configurations
+- name: set no ip redirects
   cisco.ios.ios_config:
     lines:
       - no ip redirects
       - no ip unreachables
       - no ip proxy-arp
-    parents: "interface {{ item.key }}"
-  loop: "{{ lookup('dict', hostvars[inventory_hostname]['interfaces']) }}"
-  when: item.value.layer3 is defined and item.value.layer3
+      - no shutdown
+    parents: "interface {{ item }}"
+  loop: "{{ layer3_interfaces }}"
 
-- name: Merge provided configuration with device configuration
-  cisco.ios.ios_interfaces:
+- name: set ip addresses
+  cisco.ios.ios_l3_interfaces:
     config:
-      - name: GigabitEthernet0/0
-        enabled: true
-      - name: GigabitEthernet0/1
-        enabled: true
-      - name: GigabitEthernet0/2
-        enabled: true
-      - name: GigabitEthernet0/3
-        enabled: true
+      - name: "{{ item.key }}"
+        ipv4:
+          - address: "{{ item.value.ip }}"
     state: merged
+  loop: "{{ lookup('dict', hostvars[inventory_hostname]['interfaces']) }}"

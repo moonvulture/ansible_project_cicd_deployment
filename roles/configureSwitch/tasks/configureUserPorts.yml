@@ -1,21 +1,18 @@
 ---
-- name: gather facts
+- name: gather ios facts
   cisco.ios.ios_facts:
     gather_network_resources:
       - interfaces
 
-- name: debug
-  debug: 
-    var: ansible_facts 
-
-- name: set variable
+- name: create list of network interfaces
   set_fact:
     unset_interface: "{{ ansible_facts.network_resources.interfaces }}"
 
 - name: debug
-  debug: 
-    var: unset_interface
+  template:
+    src: switchport.j2
+    dest: /root/ansible_projects/ansible_project_cicd_pipeline/roles/configureSwitch/files/debug.txt
 
-- name: apply switchport configs
+- name: configure user interfaces
   cisco.ios.ios_config:
     src: switchport.j2

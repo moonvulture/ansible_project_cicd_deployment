@@ -1,0 +1,4 @@
+--- 
+- name: Write Mem
+  cisco.ios.ios_command:
+    commands: write memory

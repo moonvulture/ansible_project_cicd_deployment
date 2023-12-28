@@ -1,5 +1,5 @@
 ---
-- name: Merge provided OSPF V2 configuration - Configure Networks
+- name: configure ospf process 1569
   cisco.ios.ios_ospfv2:
     config:
       processes:
@@ -12,23 +12,21 @@
               area: 0
   loop: "{{ ospf.networks }}"
 
-- name: Merge provided OSPF V2 configuration - Configure Router ID
+- name: configure router id for process 1569
   cisco.ios.ios_ospfv2:
     config:
       processes:
         - process_id: 1569
           router_id: "{{ router_id }}"
 
-- name: Merge provided OSPF V2 configuration - Configure Passive Interfaces
+- name: configure passive interfaces for process 1569
   cisco.ios.ios_ospfv2:
     config:
       processes:
         - process_id: 1569
-          router_id: "{{ router_id }}"
           passive_interfaces:
             default: true
             interface:
               set_interface: false
-              name: "{{ item.key }}"
-  loop: "{{ lookup('dict', hostvars[inventory_hostname]['interfaces']) }}"
-  when: item.value.active_interface is defined and item.value.active_interface
+              name: "{{ item }}"
+  loop: "{{ ospf_1569_interfaces }}"
